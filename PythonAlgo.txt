@@ -1,0 +1,251 @@
+# Sorting:
+def sort(e):
+    length = range(1, len(e))
+    for i in length:
+        val = e[i]
+        while e[i-1] > val:
+            e[i], e[i-1] = e[i-1], e[i]
+            i -= 1
+    return e
+
+# Tree/Binary tree: --> Form of dict().
+def create(e):
+    tree = dict()  # This is our creation of the tree, cause tree is actually an empty dictionary.
+    tree[e] = {'P': None, 'L': None, 'R': None}
+    return tree
+
+def add_child(tree, parent, e, side):
+    tree[e] = {'P': parent, 'L': None, 'R': None}
+    tree[parent][side] = e
+    return tree
+
+def is_root(tree, parent):
+    return tree[parent]['P'] == None
+
+def depth(tree, start):
+    if is_root(tree, start):
+        return 0
+    else:
+        return 1 + depth(tree, tree[start]['P'])
+
+def is_leaf(tree, node):
+    return tree[node]['L'] == None and tree[node]['R'] == None
+
+def height(tree, node):
+    if node is None:
+        return False
+    if is_leaf(tree, node):
+        return 0
+    else:
+        LC = tree[node]['L']  # Left child
+        RC = tree[node]['R']  # Right child
+        return 1 + max(height(tree, LC), height(tree, RC))
+
+def left(tree, node):
+    if is_leaf(tree, node):
+        return False
+    else:
+        return tree[node]['L']
+
+def right(tree, node):
+    if is_leaf(tree, node):
+        return False
+    else:
+        return tree[node]['R']
+
+def sibling(tree, node):
+    if node is None:
+        return None
+    else:
+        parent = tree[node]['P']
+        if parent:
+            if tree[parent]['L'] == node:
+                return tree[parent]['R']
+            else:
+                return tree[parent]['L']
+        else:
+            return None
+
+# Function breadth first traversal.
+def bfs(tree, node):
+    queue, visited = [], []
+    if node is not None:
+        queue.append(node)
+    while queue:
+        current = queue.pop(0)
+        visited.append(current)
+        if tree[current]['L']:
+            queue.append(tree[current]['L'])
+        if tree[current]['R']:
+            queue.append(tree[current]['R'])
+    return visited
+
+def inorder(tree, node, visited): # This function will print out all the elements of the tree in increasing order.
+    if node != None:
+        lc = tree[node]['L']
+        rc = tree[node]['R']
+        if lc != None:
+            inorder(tree, lc, visited)
+        print('After visiting left subtree: ', node, visited)
+        visited.append(node)
+        if rc != None:
+            inorder(tree, rc, visited)
+        print('After visiting right subtree:', node, visited)
+        return visited
+
+def tree_search(tree, root, val):
+    if root == None: # Mandatory condition for this function.
+        print('Non existent node')
+        return root
+    if root == val:
+        print('Found')
+        return root
+    if val < root:
+        lc = tree[root]['L']
+        print('Left subtree - root: ', lc)
+        return tree_search(tree, lc, val)
+    else:
+        rc = tree[root]['R']
+        print('Right subtree - root: ', rc)
+        return tree_search(tree, rc, val)
+
+def iterative_tree_search(tree, root, val): # This function is the same as previous, but this one is NOT recursive.
+    while root is not None and root != val:
+        if val < root:
+            lc = tree[root]['L']
+            root = lc
+        else:
+            rc = tree[root]['R']
+            root = rc
+    return root
+
+# Min and max of the tree.
+def tree_min(tree, root):
+    if root is None:
+        return None
+    while tree[root]['L'] is not None:
+        lc = tree[root]['L']
+        root = lc
+    return root
+
+def tree_max(tree, root):
+    if root is None:
+        return None
+    while tree[root]['R'] is not None:
+        rc = tree[root]['R']
+        root = rc
+    return root
+
+# Searching for next/previous element in Binary Tree:
+def tree_successot(tree, node):
+    if tree[node]['R'] is not None:
+        return tree_min(tree, tree[node]['R'])
+    parent = tree[node]['P']
+    print('Parent node: ', parent)
+    while parent is not None and node == tree[parent]['R']:
+        node = parent
+        parent = tree[parent]['P']
+        print('Inside the while - node: ', node, 'parent: ', parent)
+    return parent
+
+# ### Class work, we need to traverse through our tree and return all odd numbers from the binary tree.
+def odd_tree(tree, node, ls):
+    if node != None:
+        lc = tree[node]['L']
+        rc = tree[node]['R']
+        odd, even = [], []
+        if lc != None:
+            odd_tree(tree, lc, ls)
+        ls.append(node)
+        if rc != None:
+            odd_tree(tree, rc, ls)
+        for e in ls:
+            if e % 2 != 0:
+                odd.append(e)
+            else:
+                even.append(e)
+        return odd, even
+
+def bfs_odd(tree, root): # Its the same function as bfs but we added one step.
+    queue, visited = [], []
+    if root is not None:
+        queue.append(root)
+    while queue:
+        current = queue.pop(0)
+        if current % 2 != 0:  # This is the step for adding only odd numbers from the tree.
+            visited.append(current)
+
+        if tree[current]['L']:
+            queue.append(tree[current]['L'])
+        if tree[current]['R']:
+            queue.append(tree[current]['R'])
+    return visited
+# Graph: --> Form of dict().
+#Creating: graph = {1: [2], 2: [3]}
+#Adding: graph[1].append(3)
+
+def vertex_count(graph): # returns the number if objects(nodes) in graph
+    return len(graph)
+
+def edge_count(graph): # returns the number of edges in the graph
+    count = 0
+    for k in graph:
+        count += len(graph[k])
+        return count/2
+
+def vertices(graph): # returns a list of the vertices in a graph
+    return list(graph.keys())
+
+def edges(graph): # returns a list of the edge in a graph
+    for k in graph:
+        for node in graph[k]:
+            e1 = (k, node)
+            e2= (node, k)
+            if e1 not in edges and e2 not in edges:
+                edges.append(e1)
+
+def get_edge(graph, u, v): # returns the True if the edge (u, v)/(v, e) exists.
+    if u in graph[v] and v in graph[u]:
+        return True
+    else:
+        return False
+
+def degree(graph, u): # returns the number of incident edges to node u.
+    return len(graph[u])
+
+def incident_edges(graph, u): # returns a list with the nodes connected to node u.
+    return graph[u]
+
+def insert_vertex(graph, u): # adding a new vertex into a graph
+    if u not in graph:
+        graph[u] = []
+    return graph
+
+def insert_edge(graph, u, v):
+    if (u not in graph) or (v not in graph):
+        print("One or both nodes do not exist.")
+        return graph
+    if u not in graph[v]:
+        graph[v].append(u)
+    if v not in graph[u]:
+        graph[u].append(v)
+    return graph
+
+def remove_vertex(graph, u):
+    if u not in graph:
+        print("The node does not exist.")
+        return graph
+    for neight in graph[u]:
+        graph[neight].remove(u)
+    del graph[u]
+    return graph
+
+def remove_edge(graph, u, v):
+    if (u not in graph) or (v not in graph):
+        print("one or both nodes do not exist")
+        return graph
+    if u in graph[v] and v in graph[u]:
+        graph[v].remove(u)
+        graph[u].remove(v)
+    return graph
+

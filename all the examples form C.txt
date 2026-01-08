@@ -1,0 +1,1589 @@
+//Program to find the smallest value in an array
+/*#include <stdio.h>
+int minimum(int values[], int NumOfElements){
+    int minValue, i;
+    minValue = values [0];
+    for (i = 1; i < NumOfElements; ++i)
+        if (values[i] < minValue)
+            minValue = values[i];
+    return minValue;
+}
+int main(){
+    int array1 [5] = {157, -2, 26, 24, 10};
+    int array2 [7] = {23, 24, 9, 34, -89};
+    printf("array1 minimum: %i\n", minimum(array1,5));
+    printf("array2 :%i\n", minimum(array2,7));
+    return 0;
+}*/
+//Program to sort arrays
+/*#include <stdio.h>
+void sort (int a[], int n){
+    int i, j ,temp;
+    for (i = 0; i < n - 1; ++i)
+        for (j = i + 1; j <  n; ++j)
+            if (a[i] < a [j]){
+                temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+}
+void sort (int a[], int n);
+int main (void)
+{
+    int i;
+    int array[16] = { 34, -5, 6, 0, 12, 100, 56, 22,
+                      44, -3, -9, 12, 17, 22, 6, 11 };
+    printf ("The array before the sort:\n");
+    for ( i = 0; i < 16; ++i )
+        printf ("%i ", array[i]);
+    sort (array, 16); //this function actually makes sort
+    printf ("\n\nThe array after the sort:\n");
+    for ( i = 0; i < 16; ++i )
+        printf ("%i ", array[i]);
+    printf ("\n");
+    return 0;
+}*/
+//Example of global variable
+/*#include <stdio.h>
+int x;
+
+void f1 (){
+    ++x;
+}
+void f2 (){
+    ++x;
+}
+int main(){
+    x = 7;
+    f1();
+    f2();
+    printf("x == %i", x);
+}*/
+//Example of static and auto variables
+/*#include <stdio.h>
+void auto_static (){
+    int autoVar = 1;
+    static int staticVar = 1;
+    printf("\nautomatic = %i, static = %i\n", autoVar, staticVar);
+    ++autoVar;
+    ++staticVar;
+}
+int main(){
+    int i;
+    for (i = 0; i < 5; ++i)
+        auto_static();
+    return 0;
+}*/
+//Useful example of swap function
+/*#include <stdio.h>
+int main(){
+    int x, y;
+    printf("\nEnter your two numbers to swap them:");
+    scanf("%d",&x);
+    scanf("%d", &y);
+    printf("BEFORE: x ==> %d, and y ==> %d\n", x, y);
+    int temp = x; //We assign x to temp
+    x = y; //Then y to x
+    y = temp; //Now basically it swaped
+    printf("AFTER: x ==> %d, and y ==> %d", x, y);
+
+    return 0;
+}*/
+//Program to determine today's date Vol.1
+/*#include <stdio.h>
+int main(){
+    struct date{
+        int month;
+        int day;
+        int year;
+    };
+
+    struct date today, tomorrow;
+    const int DayPerMonth[] = {31, 28, 31, 30, 31, 30,
+                               31, 31, 30, 31, 30, 31};
+    printf("Enter today's date (MM/DD/YY).\n");
+    scanf("%i/%i/i%", &today.month, &today.day, &today.year);
+
+    if (today.day != DayPerMonth[today.month - 1]){
+        tomorrow.day = today.day + 1;
+        tomorrow.month = today.month;
+        tomorrow.year = today.year;
+    }
+    else if (today.month == 12) {//end of year
+        tomorrow.day = 1;
+        tomorrow.month = 1;
+        tomorrow.year = today.year + 1;
+    }
+    else{//end of month
+        tomorrow.day = 1;
+        tomorrow.month = today.month + 1;
+        tomorrow.year = today.year;
+    }
+
+    printf("Tomorrow's date is %i/%i/%i.\n", tomorrow.month,
+           tomorrow.day, tomorrow.year);
+
+    return 0;
+}*/
+//Program to calculate time by one second
+/*#include<stdio.h>
+struct time{
+    int hour;
+    int min;
+    int sec;
+};
+struct time timeUpdate (struct time now);
+
+int main(){
+    struct time currenTime, nextTime;
+    printf("Enter the time(hh:mm:ss): ");
+    scanf("%i:%i:%i:", &currenTime.hour, &currenTime.min,
+          &currenTime.sec);
+    nextTime = timeUpdate(currenTime);
+    printf("Updated time is %.2i:%.2i:%.2i\n", nextTime.hour, nextTime.min, nextTime.sec);
+
+    return 0;
+}
+struct time timeUpdate (struct time now) {
+    ++now.sec;
+    if ( now.sec == 60 ) { // next minute
+        now.sec = 0;
+        ++now.min;
+        if ( now.min == 60 ) { // next hour
+            now.min = 0;
+            ++now.hour;
+            if ( now.hour == 24 ) // midnight
+                now.hour = 0;
+        }
+    }
+    return now;
+}*/
+//Program to print number of days in month.
+/*#include <stdio.h>
+int main(){
+    enum month{Jan=1, Feb, March, Apr, May, June, July, Aug, Sep, Oct, Nov, Dec};
+    enum month aMonth;
+    int days;
+
+    printf("Enter month number:");
+    scanf("%i", &aMonth);
+
+    switch (aMonth){
+        case Jan: case March: case May: case July: case Aug: case Oct: case Dec:
+            days = 31; break;
+        case Apr: case June: case Sep: case Nov:
+            days = 30; break;
+        case Feb:
+            days = 28; break;
+        default:
+            printf("Bad month number\n");
+            days = 0; break;
+    }
+    if (days != 0)
+        printf("Number of days is %i.\n", days);
+    else if (aMonth == Feb)
+        printf("... or 29 it's a leap year.\n");
+    return 0;
+}*/
+//Program with signed and unsigned function
+/*#include<stdio.h>
+int main(){
+    int a = -5;
+    signed int b = 1;//u can change it io unsigned and ans will be different
+    if (a>b)
+        printf("a is bigger than b.\n");
+    else if (a<b)
+        printf("b is bigger than a.");
+    else
+        printf("a equals b.");
+    return 0;
+}*/
+//Program to illustrate pointers.
+/*#include <stdio.h>
+int main(){
+    int x = 10;
+    int *ip;
+    ip = &x;
+    printf("x = %i and *ip = %i.\n",x, *ip);
+    *ip = 78;
+    printf("x = %i and *ip = %i.\n", x, *ip);
+    return 0;
+}*/
+//Program example of pointer.
+/*#include<stdio.h>
+void display(int age1, int age2){
+    printf("%d.\n", age1);
+    printf("%d.\n", age2);
+}
+int main() {
+    int ageArray[] = {2, 4, 8, 12};
+    // pass second and third elements to display()
+
+    display(ageArray[1], ageArray[2]);
+    return 0;
+}*/
+//Program example of pointer number 2.
+/*#include<stdio.h>
+float calculateSum(float num[]);
+int main (){
+    float result, num[] = {23.4, 56.7, 12,40.4, 18};
+    //num array is passed to calculateSum()
+    result = calculateSum(num);
+    printf("Result = %.2f", result);
+    return 0;
+}
+float calculateSum(float num[]){
+    float sum = 0.0;
+    for (int i = 0; i < 6; ++i){
+        sum += num[i];
+    }
+    return sum;
+}*/
+//Program constant example.
+/*#include<stdio.h>
+int main(){
+    const float PI = 3.14;
+    //PI = 2; //error as we PI is constant.
+    printf("%.2f is PI", PI);
+    return 0;
+}*/
+//Program to check size of different variables.
+/*#include<stdio.h>
+int main(){
+    int a;
+    short b;
+    long long c;
+    long double x;
+    signed char y;
+    unsigned d;
+    //sizeof(expression or type)--> helps to understand the size of variable
+    printf("*int size of = %d bytes.\n", sizeof(a));
+    printf("*short size of = %d bytes.\n", sizeof(b));
+    printf("*long long size of = %d bytes.\n", sizeof(c));
+    printf("*long double size of = %d bytes.\n", sizeof(x));
+    printf("*signed char size of = %d bytes.\n", sizeof(y));
+    printf("*unsigned size of = %d bytes.\n", sizeof(d));
+    return 0;
+}*/
+//Signed and Unsigned example.
+/*#include<stdio.h>
+int main(){
+    unsigned int x = 36;
+    int y = - 35; //signed int
+    int z = 54; //signed int
+    unsigned int d = -34; /*code will be invalid
+    as unsigned allows to store only positive numbers.
+    printf("%u = x, %i = y, %i = z, %u = d.", x, y, z, d);
+    return 0;
+}
+*/
+//Example of ASCII value.(It's related to character.)
+/*#include<stdio.h>
+int main(){
+    char chr;
+    printf("Enter any character: ");
+    scanf("%c", &chr);
+    printf("Your character is %c.\n And ASCCI value is %d.", chr, chr);
+    return 0;
+}*/
+//How to enter multiple numbers in code.
+/*#include<stdio.h>
+int main(){
+    int x;
+    float y;
+    printf("Enter Integer then Floating point values:\n");
+    scanf("%i%f", &x, &y);//This helps us to enter multiple inputs in code.
+    printf("Int = %i\n and Float = %.3f", x, y);
+    return 0;
+}*/
+//Program to display a number if it's negative.
+/*#include <stdio.h>
+int main(){
+    int x;
+    printf("Enter your integer number:");
+    scanf("%i", &x);
+    if (x < 0){
+        printf("Your number %i is negative.", x);
+        }
+    else if (x == 0){
+        printf("Your number is natural.");
+        }
+    else{
+        printf("Your number %i is positive.", x);
+        }
+    return 0;
+}*/
+//Check whether an integer is odd or even.
+/*#include<stdio.h>
+int main(){
+    int x;
+    printf("Type your number:");
+    scanf("%i", &x);
+    // True if the remainder is 0
+    if (x%2 == 0){
+        printf("%d is an even integer.", x);
+    }
+    else{
+        printf("%d is an odd integer.", x);
+    }
+    return 0;
+}*/
+//Program to relate two integers.
+/*#include<stdio.h>
+int main(){
+    int x, y;
+    printf("Type your numbers:");
+    scanf("%i%i", &x, &y);
+
+    if(x == y){
+        printf("The numbers %i = %i.", x, y);
+    }
+    else if(x > y){
+        printf("The numbers %i > %i.", x, y);
+    }
+    else if(x < y){
+        printf("The numbers %i < %i.", x, y);
+    }
+    else{
+        printf("Error.");
+    }
+    return 0;
+}*/
+//Program which will print numbers from 1 to 10.
+/*#include<stdio.h>
+int main(){
+    int i;
+    for(i = 1; i<=10; i++){
+        printf("%i\n", i);
+    }
+    return 0;
+}*/
+//Program to calculate the sum of first n natural numbers. Positive integers 1,2,3...n are known as natural numbers
+/*#include <stdio.h>
+int main(){
+    int num, count, sum = 0;
+    printf("Enter any positive integer: ");
+    scanf("%d", &num);
+//for loop terminates when num is less than count
+    for(count = 1; count <= num; count++){
+        sum += count;
+    }
+    printf("Sum is = %d.", sum);
+    return 0;
+}*/
+//Print numbers from 1 to 10 using while looping.
+/*#include<stdio.h>
+int main(){
+    int i = 1;
+
+    while (i <= 10){
+        printf("%d\n", i);
+        ++i;
+    }
+    return 0;
+}*/
+//Program to add numbers until the user enters zero.
+/*#include<stdio.h>
+int main(){
+    double numbers, sum = 0;
+    //The body of loop is executed at least once.
+    do{
+        printf("Enter a number:");
+        scanf("%lf", &numbers);
+        sum += numbers;
+    }
+    while (numbers != 0.0);
+    printf("Sum = %.2lf", sum);
+    return 0;
+}*/
+//Program to calculate the sum of numbers (10 numbers max) If the user enters a negative number, the loop terminates.
+//Break example.
+/*#include<stdio.h>
+int main(){
+   int i;
+   int number, sum;
+
+   for (i = 1; i <= 10; ++i) {
+       printf("Enter %d:", i);
+       scanf("%d", &number);
+
+// IF THE USER ENTERS NUMBER 0, BREAK THE LOOP.
+       if (number == 0) {
+           break;
+       }
+       sum = sum + number; // sum += number;
+   }
+    printf("sum = %d", sum);
+    return 0;
+}*/
+//Program to calculate the sum of numbers (10 numbers max) If the user enters a negative number, it's not added to the result.
+//Continue example.
+/*#include<stdio.h>
+int main(){
+    int i;
+    int number, sum;
+    for(i = 1; i <= 10; ++i){
+        printf("*%d) Enter your number:", i);
+        scanf("%d",&number);
+
+        if(number < 0){
+            continue; //By this function all the negative numbers are not taken on the account.
+        }
+        sum += number; // It sums only positive integers.
+    }
+    printf("Sum is: %d", sum);
+    return 0;
+}*/
+//Simple calculator.
+/*#include<stdio.h>
+int main(){
+    char operation;
+    double n1, n2;
+    int i;
+
+    printf("Enter an operator, ex:(+, -, /, *):\n");
+    scanf("%c",&operation);
+    printf("Enter your two operands:\n");
+    scanf("%lf%lf", &n1, &n2);
+
+    switch(operation) {
+        case '+':
+            printf("%.1lf + %.1lf = %.1lf.", n1, n2, n1 + n2);
+            break;
+        case '-':
+            printf("%.1lf - %.1lf = %.1lf.", n1, n2, n1 - n2);
+            break;
+        case '*':
+            printf("%.1lf * %.1lf = %.1lf.", n1, n2, n1 * n2);
+            break;
+        case '/':
+            printf("%.1lf / %.1lf = %.1lf.", n1, n2, n1 / n2);
+            break;
+
+        default:
+            printf("Error, incorrect operator!");
+    }
+    return 0;
+}*/
+//Program to calculate the sum and average of positive numbers
+//If the user enters a negative number, the sum and average are displayed.
+/*#include<stdio.h>
+int main(){
+    const int maxInput = 100; //This basically says that max input is 100.
+    int i;
+    double number, ave, sum = 0;
+
+    for(i = 1; i <= maxInput; ++i){
+        printf("*%d) Enter your numbers:", i);
+        scanf("%lf", &number);
+        //Go to jump if  input (number) is less than 0.0 or negative.
+        if (number < 0.0){
+            goto jump;
+        }
+        sum += number;
+    }
+    //Here function jump makes answer for average and prints it with sum and ave.
+    jump:
+    ave = sum / (i -1);
+    printf("Sum = %.2f\n", sum);
+    printf("Average = %.2f", ave);
+    return 0;
+}*/
+//User defined functions examples.
+/*#include <stdio.h>
+int addNumbers(int a, int b);//This is function prototype.
+int main(){
+    int n1, n2, sum;
+    printf("Enter your two numbers:\n ");
+    scanf("%d %d", &n1, &n2);
+
+    sum = addNumbers(n1, n2);//Function call.
+    printf("Sum = %d", sum);
+    return 0;
+}
+int addNumbers (int a, int b) //function definition.
+{
+    int result;
+    result = a + b;
+    return result; //return statement.
+}*/
+//No arguments passed and no return value.
+/*#include<stdio.h>
+void checkPrimeNumbers();
+int main(){
+    checkPrimeNumbers();//argument is not passed.
+    return 0;
+}
+//return type void meaning doesn't return any value.
+void checkPrimeNumbers(){
+    int n, i, flag = 0;
+    printf("Enter a positive integers:\n");
+    scanf("%d", &n);
+
+    for (i = 2; i <= n/2; ++i){
+        if(n%i == 0){
+            flag = 1;
+        }
+    }
+    if (flag == 1)
+        printf("%d is not a prime number.", n);
+    else
+        printf("%d is a prime number.", n);
+}*/
+//Argument passed but no return value.
+/*#include<stdio.h>
+int CheckPrimeNumber(int n);
+
+int main() {
+    int n, flag;
+    printf("Enter a positive integer:\n");
+    scanf("%d", &n);
+    //n is passed to the CheckPrimeNumber() function
+    //the returned value is assigned to the flag variable
+    flag = CheckPrimeNumber(n);
+    if (flag == 1)
+        printf("%d is not a prime number.", n);
+    else
+        printf("%d is a prime number.", n);
+    return 0;
+}
+// int is returned from the function
+int CheckPrimeNumber(int n){
+    int i;
+    for(i=2; i <= n/2; ++i){
+        if (n%i == 0)
+            return 1;
+    }
+    return 0;
+}*/
+//Sum of natural numbers by using recursive function.
+/*#include<stdio.h>
+int sum(int n);//Recursive function.
+int main(){
+    int number, result;
+    printf("Enter your number:\n");
+    scanf("%d", &number);
+    result = sum(number);
+
+    printf("Sum ===> %d", result);
+    return 0;
+}
+int sum(int n){
+    if (n != 0)
+        //sum() function calls itself.
+        return n + sum(n - 1);
+    else
+        return n;
+}*/
+//Example of Local Variable.
+/*#include<stdio.h>
+int main(void){
+    for (int i = 0; i < 5; ++i){
+        printf("C programming.\n\n");
+    }
+//Error: i is not declared at this point.
+    printf("%d",i);
+    return 0;
+}*/
+//Example of Global variable.
+/*#include<stdio.h>
+void display();
+int n = 0; //This is global variable.
+
+int main(){
+    ++n;
+    display();
+    return 0;
+}
+void display(){
+    ++n;
+    printf("n == > %d", n);
+}*/
+//Static variable example.
+/*#include<stdio.h>
+void display();
+
+int main(){
+    display(); //5 + 1 == 6
+    display(); //6 + 5 == 11
+}
+void display(){
+    static int c = 1;
+    c += 5;
+    printf("%d\n", c);
+}*/
+//Arrays Example.
+/*#include<stdio.h>
+int main(){
+    int mark[] = {2,3,5,1};
+    mark[2] = -5;//Changes second element of the array to -5.
+    printf("mark[3] is ==> %d", mark[2]);
+    return 0;
+}*/
+//Program takes 5 inputs and displays each of them.
+/*#include<stdio.h>
+int main(){
+    int values[5];
+    printf("Enter your 5 integers: \n");
+    //taking input and storing them in an array.
+    for(int i = 0; i <= 5; ++i){
+        scanf("%d", &values[i]);
+    }
+    printf("Displaying integers:\n ");
+    //printing elements of an array.
+    for(int i = 0; i <= 5; ++i){
+        printf("\n%d\n", values[i]);
+    }
+    return 0;
+}*/
+//Calculating average of n numbers using arrays.
+/*#include<stdio.h>
+int main(){
+    int marks[10], i, n, sum, average;
+
+    printf("Enter number of elements:\n");
+    scanf("%d", &n);
+
+    for(i = 0; i < n; ++i){
+        printf("*%d) Enter number:", i + 1);
+        scanf("%d",&marks[i]);
+        //adding integers entered by the user.
+        sum += marks[i];
+    }
+    average = sum/n;
+    printf("Rough average = %d", average);
+    return 0;
+}*/
+//Practice, element from array which is not in it.
+/*#include<stdio.h>
+int main(){
+    int array[5] = {3,4,1,3,4};
+    printf("This is element from outside of the array[12] = %d", array[5]);
+    //Might be error or useless info.
+    return 0;
+}*/
+//Multidimensional arrays. C program to store temperature of two cities of a week and display it.
+/*#include<stdio.h>
+const int CITY = 2;
+const int WEEK = 7;
+int main(){
+    int temperature[CITY][WEEK];
+    //Using nested loop to store values in 2d array
+    for(int i = 0; i < CITY; ++i){
+        for(int j = 0; j < WEEK; ++j){
+            printf("City %d, Day %d:", i + 1, j + 1);
+            scanf("%d", &temperature[i][j]);
+        }
+    }
+    printf("\nDisplaying values: \n\n");
+    //Using nested loop to display values of 2d array.
+    for(int i = 0; i < CITY; ++i){
+        for(int j = 0; j < WEEK; ++j){
+            printf("City %d, Day %d = %d\n.", i + 1, j + 1, temperature[i][j]);
+        }
+    }
+    return 0;
+}*/
+//Sum of two matrices. 2D matrix.
+/*#include<stdio.h>
+int main(){
+    float a[2][2], b[2][2], result[2][2];
+    //Taking input using nested for loop.
+    printf("Enter elements of 1st matrix\n");
+    for (int i = 0; i < 2; ++i)
+        for(int j = 0; j < 2; ++j){
+            printf("Enter a%d%d: ", i + 1, j +1);
+            scanf("%f", &a[i][j]);
+        }
+    //Taking input using nested for loop
+    printf("Enter elements of 2en matrix\n");
+    for(int i = 0; i < 2; ++i)
+        for(int j = 0; j < 2; ++j){
+            printf("Enter b%d%d: ", i + 1, j + 1);
+            scanf("%f", &b[i][j]);
+        }
+    //Adding corresponding elements of two arrays.
+    for(int i = 0; i < 2; ++i)
+        for(int j = 0; j < 2; ++j){
+            result[i][j] = a[i][j] + b[i][j];
+        }
+    //Here is the sum.
+    printf("\nSum Of Matrix:\n");
+
+    for(int i = 0; i < 2; ++i)
+        for(int j = 0; j < 2; ++j){
+            printf("%.1f\t", result[i][j]);
+
+            if (j == 1)
+                printf("\n");
+        }
+    return 0;
+}*/
+//Passing individual array elements.
+/*#include<stdio.h>
+void display(int age1, int age2){
+    printf("%d\n", age1);
+    printf("%d\n", age2);
+}
+int main(){
+    int arrayAge[] = {2, 8, 4, 12};
+    //pass second and third elements to display.
+    display(arrayAge[1], arrayAge[2]);
+    return 0;
+}*/
+//Program to calculate the sum of array elements by passing a function.
+/*#include<stdio.h>
+float calculateSum(float num[]);
+int main(){
+    float result, num[] = {23.4, 55, 22.6, 40.5, 18};
+    //num array is passed to calculateSum()
+    result = calculateSum(num);
+    printf("Result = %.2f", result);
+    return 0;
+}
+float calculateSum(float num[]){
+    float sum = 0.0;
+    for(int i = 0; i < 6; ++i){
+        sum += num[i];
+    }
+    return sum;
+}*/
+//Passing 2D arrays
+/*#include<stdio.h>
+void displayNumbers(int num[2][2]);
+int main() {
+    int num[2][2];
+    printf("Enter 4 numbers:\n");
+    for (int i = 0; i < 2; ++i) {
+        for (int j = 0; j < 2; ++j) {
+            scanf("%d", &num[i][j]);
+        }
+    }
+    //Passing 2D Array.
+    displayNumbers(num);
+    return 0;
+}
+void displayNumbers(int num[2][2]){
+    printf("Displaying:\n");
+    for(int i = 0; i < 2; ++i){
+        for(int j = 0; j < 2; ++j){
+            printf("%d\n", num[i][j]);
+        }
+    }
+}*/
+//Example of pointers.
+/*#include <stdio.h>
+int main(){
+    int *pc, c; //pc is a pointer and c is simple variable.
+    c = 5;
+    pc = &c;//Here we are assigning pc pointer to the address of c.
+    printf("%d", *pc);
+    return 0;
+}*/
+//Working of pointers.
+/*#include<stdio.h>
+int main(){
+    int*pc, c;
+
+    c = 22;
+    pc = &c;
+
+    printf("Address of c: %p\n", &c);
+    printf("Value of c: %d\n\n", c);
+
+    printf("Address of pointer pc: %p\n", &pc);
+    printf("Value of pointer pc: %d\n\n", *pc);
+
+    return 0;
+}*/
+//Program to print addresses of array elements.
+/*#include<stdio.h>
+int main(){
+    int x[4];
+    int i;
+    for(i = 0; i < 4; ++i){
+        printf("&x[%d] = %p\n", i, &x[i]);
+    }
+    printf("Address of array x: %p", x);
+    return 0;
+}*/
+//Pointers and Arrays.
+/*#include<stdio.h>
+int main(){
+    int i, x[6], sum = 0;
+
+    printf("Enter 6 numbers:\n");
+    for(i = 0; i < 6; ++i){
+        scanf("%d", &x[i]);//this is the same as scanf("%d", &x + i);
+        sum += x[i];//this is same as sum += *(x + i);;
+    }
+    printf("Sum = %d", sum);
+    return 0;
+}*/
+//Pointers and Array example.
+/*#include<stdio.h>
+int main(){
+    int *x;
+    int y[3] = {10,15,20};
+
+    ally second is 20
+    printf("This is second elemenx = &y[2];//Basict from Y array: %d\n", *x);
+    printf("The same but +1 to that element: %d", *x+1);
+
+    return 0;
+}*/
+//Pass Addresses to Functions.
+/*#include<stdio.h>
+void swap(int *n1, int *n2);
+int main(){
+    int num1 = 5, num2 = 10;
+
+    //Here address of num1 and num2 is passed.
+    swap(&num1, &num2);
+
+    printf("num1 = %d.\n", num1);
+    printf("num2 = %d.\n", num2);
+    return 0;
+}
+void swap(int *n1, int  *n2){
+    int temp;
+    temp = *n1;
+    *n1 = *n2;
+    *n2 = temp;
+}*/
+//Example_2_passing pointers to function.
+/*#include<stdio.h>
+void addOne(int *ptr){
+    (*ptr)++;//adding 1 to *ptr.
+}
+int main(){
+    int *x;
+    int y;
+    printf("Enter your number:\n");
+    scanf("%d", &y);
+
+    x = &y;
+    addOne(x);
+    printf("%d", *x);
+    return 0;
+}*/
+//Example of function prototype, Calling.f, Function definition.
+/*#include<stdio.h>
+ AddNumbers(int x, int y);
+ MultNumbers(int x, int y);
+
+int main(){
+    int n1, n2, sum, multi;
+    printf("Enter your two numbers:\n");
+    scanf("%d%d", &n1, &n2);
+    sum = AddNumbers(n1, n2);
+    multi = MultNumbers(n1, n1);
+    printf("Numbers if we multiply them is equal to %d.\n", MultNumbers(n1, n2));
+    printf("Numbers if we add them is equal to %d.\n", AddNumbers(n1, n2));
+    return 0;
+}
+ MultNumbers(int x, int y){
+    int ans;
+    ans = x * y;
+    return ans;
+}
+ AddNumbers(int x, int y){
+    int result;
+    result = x + y;
+    return result;
+}*/
+//Program to calculate the sum of n numbers entered.
+/*#include<stdio.h>
+#include<stdlib.h>
+int main(){
+    int n, *ptr, sum;
+    printf("Enter numbers of elements:\n");
+    scanf("%d", &n);
+
+    ptr = (int*) malloc(n * sizeof (int));
+
+    //if memory cannot be allocated
+    if(ptr == NULL){
+        printf("Error!");
+        exit(0);
+    }
+    int i;
+    printf("Enter elements:\n");
+    for(i = 0; i < n; ++i){
+        scanf("%d", ptr + i);
+        sum += *(ptr + i);
+    }
+    printf("Sum = %d", sum);
+    //deallocating the memory.
+    free(ptr);
+    return 0;
+}*/
+//Dynamic memory allocation.
+/*#include<stdio.h>
+#include<stdlib.h>
+int main(){
+    float *f = NULL;
+    f = malloc(sizeof(double));
+    *f = 3.14;
+    printf("%f", *f);
+    return 0;
+}*/
+//Rand();//Random function.
+/*#include<stdio.h>
+#include<stdlib.h>//Header which we need for using rand(); function
+int main(){
+    int i;
+    i = rand();//Function which gives random number.
+    printf("%d\n", i);
+    i = rand();
+    printf("%d\n", i);
+    i = rand();
+    printf("%d\n", i);
+    return 0;
+}*/
+//Fibonacci sequence w recursion.
+/*#include <stdio.h>
+int fibonacci(int i);  //Recursion function
+int  main() {
+    int i, n;
+    printf("Enter the number of sequence:\n");
+    scanf("%d", &n);
+    for (i = 0; i < n; i++) {
+        printf("%d\t\n", fibonacci(i));  //function calls fibonacci(i)
+    } //(\t)->means horizontal tab.
+    return 0;
+}
+int fibonacci(int i){//definition of the function.
+    if(i == 0) {
+    return 0;
+    }
+    if(i == 1) {
+    return 1;
+    }
+    return fibonacci(i-1) + fibonacci(i-2);
+}*/
+//Recursion.
+/*#include<stdio.h>
+int fun(int n);
+int main(){
+    int n = 4;
+    printf("%d", fun(n));
+    return 0;
+}
+int fun(int n){
+    if(n == 0){ //  OUT PUT IS 5 AS IT FIVE TIMES CALLS ITSELF.
+        return 1;
+    }
+    else{
+        return 1 + fun(n-1);
+    }
+}*/
+//5 Random numbers using rand() function.
+/*#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main(){
+    int i;
+    printf("Random numbers:\n");
+    for(i = 0; i < 9; i++){
+        printf("%d\t", rand());
+    }
+    return 0;
+}*/
+//Work with files.(Creates file for names and marks of a students, you can add and see them)
+/*#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include <stdio.h>
+int main()
+{
+    char name[50];
+    int marks, i, num;
+
+    printf("Enter number of students:\n");
+    scanf("%d", &num);
+
+    FILE *fptr;
+    fptr = (fopen("student.txt", "w"));//Creates new file in C called student.txt
+    if(fptr == NULL)                                 //W means open for writing.
+    {
+        printf("Error!"); //If there is no file created OUTPUT will be ERROR!
+        exit(1);
+    }
+
+    for(i = 0; i < num; ++i)
+    {
+        printf("For student%d\nEnter name: ", i+1);
+        scanf("%s", name);
+
+        printf("Enter marks: ");
+        scanf("%d", &marks);
+
+        fprintf(fptr,"\nName: %s \nMarks=%d \n", name, marks);
+    }
+
+    fclose(fptr);
+    return 0;
+}*/
+
+//Bubble sorting method.(Sorting)
+#include<stdio.h>
+void sort(int array[], int size){
+    for(int i = 0; i < size - 1; i++){
+        for(int j = 0; j < size - 1; j++){
+            if(array[j] > array[j+1]){
+                int temp = array[j];
+                array[j] = array [j + 1];
+                array [j + 1] = temp;
+            }
+        }
+    }
+}
+void printArray(int array[], int size){
+    for(int i = 0; i < size; i++){
+        printf("%d ", array[i]);
+    }
+}
+int main(){
+    int array[] = {9, 1, 2, 4, 3, 7, 5, 90, 102, 54};
+    //char array[] = {'B', 'D', 'A', 'C'};
+    int size = sizeof(array)/sizeof (array[0]);
+    sort(array, size);
+    printArray(array, size);
+    return 0;
+}
+
+//Insertion Sort 
+#include<stdio.h>
+void sort(int a[], int length);
+int main(){
+    int a[]= {8,4,7,3,1,9,2};
+    sort(a, 7);
+    for(int i = 0; i < 7; i++){
+        printf("a[%d] = %d\n", i, a[i]);
+    }
+    return 0;
+}
+void sort(int a[], int length){
+    for(int i = 1; i < length; i++){
+        int key = a[i];
+        int j = i - 1;
+        while(j >= 0 && a[j] > key){
+            a[j+1] = a[j];
+            j = j - 1;
+        }
+        a[j + 1] = key;
+    }
+}
+
+//Factorial calculator with recursion.
+#include<stdio.h>
+int ftr(int x);
+int main(){
+    int num;
+    printf("Enter an integer for a factorial calculation:\n");
+    scanf("%d", &num);
+
+    printf("***The factorial of %d is %d.", num, ftr(num));
+    return 0;
+}
+int ftr(int x){
+    if(x == 0){
+        return 1;
+    }
+    else
+        return x * ftr(x - 1);
+}
+
+//Power with recursion
+/*#include<stdio.h>
+#include<stdlib.h>
+float power(float x, int y);
+int main(){
+    float base;
+    int expo;
+    printf("Enter your base and it's power:\n");
+    scanf("%f\n", &base);
+    scanf("%d", &expo);
+
+    printf("%.1f ^ %d = %.1f", base, expo, power(base, expo));
+    return 0;
+}
+float power(float x, int y){
+    if(y == 1){
+        return x;
+    }
+    else
+        return x * power(x, y - 1);
+}*/
+
+//Deleting duplicate elements from the array
+#include <stdio.h>
+int main()
+{
+    int arr[] = {10, 20, 10, 1, 100, 10, 2, 1, 5, 10};
+    int size = sizeof(arr)/sizeof(arr[0]);
+    int i, j, k;
+
+    printf("Elements in the array: ");
+    for(i = 0; i < size; i++){
+        printf("%d ", arr[i]);
+    }
+
+    for(i = 0; i < size; i++){
+        for(j = i + 1; j < size; j++){
+            if(arr[i] == arr[j]){
+                for(k = j; k < size - 1; k++){
+                    arr[k] = arr[k + 1];
+                }
+                size--;
+                j--;
+            }
+        }
+    }
+
+    printf("\nArray elements after deleting duplicates : ");
+    for(i = 0; i < size; i++){
+        printf("%d ", arr[i]);
+    }
+    return 0;
+}
+
+
+//Data Structure
+
+#include<stdio.h>
+struct Cst{
+    char name[30];
+    char surname[30];
+    float credit;
+};
+
+int main(){
+    float rate = 10.0;
+    int customer_code = 1;
+    int tel_num = 123456789;
+
+    struct Cst first = {};
+    struct Cst second = {};
+    struct Cst customers[] = {first,second};
+
+
+    //printf("%d) Enter the date of the customer and in detail: name, surname and credit.");
+    for(int i = 0; i < sizeof(customers)/sizeof(customers[0]); i++){
+        printf("%d) Enter the date of the customer and in detail: name, surname and credit.\n", i + 1);
+        scanf("%s", customers[i].name);
+        scanf("%s", customers[i].surname);
+        scanf("%f", &customers[i].credit);
+    }
+
+    printf("\nEntered data:\n");
+    for(int i = 0; i < sizeof(customers)/sizeof(customers[0]); i++){
+        printf("%d) ",customer_code + i);
+        printf("%s ",customers[i].name);
+        printf("%s ",customers[i].surname);
+        printf("%.0f\n",customers[i].credit);
+    }
+    printf("\n|Test|Input|Result|\n");
+
+    for(int i = 0; i < sizeof(customers)/sizeof(customers[0]); i++){
+        printf("%d) ",customer_code + i);
+        printf("%s ",customers[i].name);
+        printf("%s ",customers[i].surname);
+        printf("%.0f\n",customers[i].credit - rate);
+    }
+
+    printf("\nTelephone number is: %d\nRate: %.1f (euros per month)\n\n", tel_num, rate);
+
+    return 0;
+}
+
+
+//Function for deleting dublicates from a given array.
+
+#include<stdio.h>
+int rduplicate(int arr[], int size){
+    for(int i = 0; i < size; i++){
+        for(int j = i + 1; j < size; j++){
+            if(arr[i] == arr[j]){
+                for(int k = j; k < size - 1; k++){
+                    arr[k] = arr[k + 1];
+                }
+                size--;
+                j--;
+            }
+        }
+    }
+
+}
+int main(){
+    int arr[] = {34,765,23,12,12,5,5,6,7,4,6,3,1,2,2,765 };
+    int size = sizeof(arr)/sizeof(arr[0]);
+
+    printf("Elements in array: ");
+    for(int i=0; i < size; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+
+    size = rduplicate(arr, size);
+
+    printf("\nArray elements after deleting duplicates: ");
+    for(int i=0; i < size; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    return 0;
+}
+
+
+//Comparing sizes of a matrix symetric or not:
+#include <stdio.h>
+#define SIZE 3
+int main(){
+    int A[SIZE][SIZE] = {{1,2,3},{2,4,5},{3,5,8}}; // Original matrix
+    int B[SIZE][SIZE];  // Transpose matrix
+    int row, col, isSymmetric;
+    
+    for(row = 0; row < SIZE; row++){
+        for(col = 0; col < SIZE; col++){
+            /* Store each row of matrix A to each column of matrix B */
+            B[row][col] = A[col][row];
+        }
+    }
+    /*
+     * Check whether matrix A is equal to its transpose or not
+     */
+    isSymmetric = 1;
+    for(row=0; row<SIZE && isSymmetric; row++){
+        for(col=0; col<SIZE; col++){
+            if(A[row][col] != B[row][col]){
+                isSymmetric = 0;
+                break;
+            }
+        }
+    }
+
+    /*
+     * If the given matrix is symmetric.
+     */
+    if(isSymmetric == 1){
+        printf("\nThe given matrix is Symmetric matrix: \n");
+
+        for(row=0; row<SIZE; row++){
+            for(col=0; col<SIZE; col++){
+                printf("%d ", A[row][col]);
+            }
+
+            printf("\n");
+        }
+    }
+    
+    else{
+        printf("\nThe given matrix is not Symmetric matrix.");
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+ADT LINKED LIST:
+#include<stdio.h>
+#include<stdlib.h>
+
+//creating a Node which is pointing to the next value.
+struct node{
+    int value;
+    struct node *next;
+};
+
+typedef struct node node_t;//For not writing "struct" every time
+
+void printList(node_t *head){//Function for printing our list.
+    node_t *temp = head;
+    while(temp != NULL){
+        printf("%d ", temp -> value);
+        temp = temp -> next;
+    }
+    printf("\n");
+}
+
+int main(){
+    node_t n1, n2, n3;
+    node_t *head;
+    
+    n1.value = 45;
+    n2.value = 8;
+    n3.value= 32;
+
+    //Linking them up.
+    head = &n1;
+    n3.next= NULL;
+    n2.next = &n3;
+    n1.next = &n2; //For knowing when to stop.
+
+    node_t n4;//New node
+    n4.value = 13;
+    n4.next = &n3;
+    n2.next = &n4;
+
+   // (Function for pass without printing head)head = head -> next;
+
+    printList(head);
+    return 0;
+}
+
+
+
+
+
+// A simple C program for traversal of a LINKED LIST
+#include <stdio.h>
+#include <stdlib.h>
+ 
+struct Node {
+    int data;
+    struct Node* next;
+};
+ 
+// This function prints contents of linked list starting from
+// the given node
+void printList(struct Node* n)
+{
+    while (n != NULL) {
+        printf(" %d ", n->data);
+        n = n->next;
+    }
+}
+ 
+int main()
+{
+    struct Node* head = NULL;
+    struct Node* second = NULL;
+    struct Node* third = NULL;
+ 
+    // allocate 3 nodes in the heap
+    head = (struct Node*)malloc(sizeof(struct Node));
+    second = (struct Node*)malloc(sizeof(struct Node));
+    third = (struct Node*)malloc(sizeof(struct Node));
+ 
+    head->data = 1; // assign data in first node
+    head->next = second; // Link first node with second
+ 
+    second->data = 2; // assign data to second node
+    second->next = third;
+ 
+    third->data = 3; // assign data to third node
+    third->next = NULL;
+ 
+    printList(head);
+ 
+    return 0;
+}
+
+
+
+
+
+
+/*STACK implementation using static array*/
+
+#include<stdio.h>
+//Pre-processor macro
+#define stackCapacity 5
+
+int stack[stackCapacity], top=-1;
+void push(int);
+int pop(void);
+int isFull(void);
+int isEmpty(void);
+void traverse(void);
+void atTop(void);
+
+//Main function of the program
+void main(void)
+{
+    int choice, stackItem;
+    //Always true While loop for continue iteration
+    while(1){
+        //Instructions to the user
+        printf("Stack Operation n");
+        printf("Enter `1` for  Push Operation n");
+        printf("Enter `2` for  Pop Operation n");
+        printf("Enter `3` for  atTop Operation n");
+        printf("Enter `4` for  Traverse Operation n");
+        printf("Enter `5` for  Quit Operation n");
+        printf("Enter your choice : ");
+        scanf("%d",&choice);
+        //Switch Case to do the user specified task
+        switch(choice){
+            case 1:
+                    printf("Enter a integer value : ");
+                    scanf("%d",&stackItem);
+                    push(stackItem);
+                    break;
+            case 2:
+                    stackItem = pop();
+                    if(stackItem == 0){
+                        printf("Your stack is underflow");
+                    }else{
+                        printf("Last popped item : %dn", stackItem);
+                    }
+                    break;
+            case 3:
+                    atTop();
+                    break;
+            case 4:
+                    traverse();
+                    break;
+            case 5:
+                    return;
+                    break;
+            default: printf("Please enter correct choice : ");
+        }
+    }
+}
+
+
+
+
+
+//Push Function to insert element into the stack
+void push(int stackElement)
+{
+    if(isFull()){
+        printf("Stack is full.It can't be overflowed. n");
+    }else{
+        top++;
+        stack[top] = stackElement;
+        printf("%d has been pushed n", stackElement);
+    }
+}
+
+//Function to check, Is stack full?
+int isFull(){
+    if(top == stackCapacity-1){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+
+//Function to check, Is stack empty?
+int isEmpty(){
+    if(top == -1){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+//Function to pop last element of the stack
+int pop(){
+    if(isEmpty()){
+        return 0;
+    }else{
+        return stack[top--];
+    }
+}
+
+//function to check, Which element on the top?
+void atTop()
+{
+    if(isEmpty())
+    {
+        printf("Your Stack is empty n");
+    }else{
+        printf("Element at top is : %d n", stack[top]);
+    }
+}
+
+//Function to display the all the characters elements of stack
+void traverse(){
+    if(isEmpty())
+    {
+        printf("Your Stack is empty n");
+    }else{
+        int i;
+        printf("Stack Elements are : n");
+        for(i=0; i <= top; i++){
+            printf("%d n", stack[i]);
+        }
+    }
+}
+
+
+
+
+
+QUEUE implementation.
+
+#include <stdio.h>
+#include <stdlib.h>
+
+//Just like in Linked List we creat a node.
+struct Node {
+    int data;
+    struct Node *next;
+};
+
+//We creat a Queue structure for getting values.
+struct Queue {
+    struct Node *front;
+    struct Node *last;
+    unsigned int size;
+};
+
+//We always creat first values equal to Null.
+void init(struct Queue *q) {
+    q->front = NULL;
+    q->last = NULL;
+    q->size = 0;
+}
+
+int front(struct Queue *q) {
+    return q->front->data;
+}
+
+//Adding an element to a Queue
+void pop(struct Queue *q) {
+    q->size--;
+
+    struct Node *tmp = q->front;
+    q->front = q->front->next;
+    free(tmp);
+}
+
+//Deleting an element from a queue.
+void push(struct Queue *q, int data) {
+    q->size++;
+
+    if (q->front == NULL) {
+        q->front = (struct Node *) malloc(sizeof(struct Node));
+        q->front->data = data;
+        q->front->next = NULL;
+        q->last = q->front;
+    } else {
+        q->last->next = (struct Node *) malloc(sizeof(struct Node));
+        q->last->next->data = data;
+        q->last->next->next = NULL;
+        q->last = q->last->next;
+    }
+}
+
+// Driver code.
+int main(void) {
+    struct Queue q;
+    init(&q);
+    push(&q, 1);
+    push(&q, 2);
+    printf("%d\n", front(&q));
+    pop(&q);
+    printf("%d\n", front(&q));
+}

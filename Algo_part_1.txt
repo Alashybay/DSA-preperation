@@ -1,0 +1,428 @@
+""""
+Write the function between(x,y,z) which returns True if x ≤ y ≤ z, False otherwise
+"""
+
+
+def between(x, y, z):
+    if not x <= y <= z:
+        return False
+    return True
+
+
+# print(between(2,2,2))
+"""
+A number a is power of b if it is divisible by b and if a/b is a
+power of b. Write a function named power(a,b) which
+requires two arguments (a and b) and returns True if a is a
+power of b.
+"""
+
+
+def power(a, b):
+    if a == 1:
+        return b
+    elif a % b == 0:
+        return power(a // b, b)
+    else:
+        return -1
+
+
+# print(power(81,3))
+"""
+Write the recursive function product(n) which requires an
+integer number n as argument and returns its product with all
+natural numbers that precede it. For example, product(4)
+must return 24 = 4 · 3 · 2 · 1
+"""
+
+
+def product(n):
+    if n == 0:
+        return 1
+    else:
+        n = n * product(n - 1)
+    return n
+
+
+# print(product(4))
+"""
+Implement the greekpi function that computes π with an error
+1/1000 smaller than the “true” value provided by math.pi
+"""
+import math
+
+
+def greekpi():
+    gpi, i = 0, 0
+    while abs(gpi - math.pi) > 0.0001:
+        gpi += 4 * math.pow(-1, i) / (2 * i + 1)
+        print(i, gpi, abs(gpi - math.pi))
+        i += 1
+
+
+# print(greekpi())
+"""
+Write a program that reads a number between 1,000 and 999,999
+from the user and prints it with a comma separating the thousands.
+"""
+
+
+def comma(n):
+    if len(n) == 4:
+        return (n[:1] + "," + n[1:])
+    elif len(n) == 5:
+        return (n[:2] + "," + n[2:])
+    elif len(n) == 6:
+        return (n[:3] + "," + n[3:])
+    else:
+        print("Invalid input, please read the requirement.")
+        return None
+
+
+# x = str(input("Enter you number: "))
+# print(comma(x))
+"""
+Implement the Python function myreduce(a) that returns
+the sum of the elements of the list a.
+"""
+
+
+def myreduce(arg):
+    sum = 0
+    for e in arg:
+        sum += e
+    return sum
+
+
+import random
+
+mylist = []
+for e in range(15):
+    if e not in mylist:
+        mylist.append(random.randint(1, 20))
+# print(mylist)
+# print(myreduce(mylist))
+"""
+Implement the Python function mymap(a) that returns a list
+containing the elements of the list a each multiplied by 2.
+"""
+
+
+def mymap(a):
+    new = []
+    for e in a:
+        new.append(e * 2)
+    return new
+
+
+# print(mymap(mylist))
+"""
+Implement the Python function myfilter(a) that returns a
+list containing the odd elements of the list a each multiplied
+by 2.
+"""
+
+
+def myfilter(a):
+    new = []
+    for e in a:
+        if e % 2 != 0:
+            new.append(e * 2)
+    return new
+
+
+# print(myfilter(mylist))
+"""
+Function for adding elements in the two lists. 
+"""
+
+
+def addition(a, b):
+    add = []
+    i = 0
+    if len(a) == len(b):
+        while i < len(a):
+            add.append(a[i] + b[i])
+            i += 1
+        return add
+    else:
+        return False
+
+
+l1 = [100, 100, 20, 30]
+l2 = [10, 10, 2, 3]
+# print(addition(l1, l2))
+"""
+Function prod(a) for multipling elements in the list.
+"""
+
+
+def prod(a):
+    res = 1
+    for e in a:
+        res = res * e
+    return res
+
+
+import random
+
+mylist = []
+for e in range(10):
+    mylist.append(random.randint(1, 20))
+# print(mylist)
+# print(prod(mylist))
+"""
+only Smallest, only largest, only smallest and largest, differences between smallest and largesst 
+"""
+
+
+def sld(arg):
+    sm = arg[0]
+    lg = arg[0]
+    for e in arg:
+        if e < sm:
+            sm = e
+        elif e > lg:
+            lg = e
+    return sm, lg, lg - sm
+
+
+l1 = []
+import random
+
+for e in range(10):
+    if e not in l2:
+        l1.append(random.randint(1, 20))
+# print(l1)
+# print(sld(l1))
+
+"""
+Function for printing only negative and positive numbers
+"""
+
+
+def negative(arg1, arg2):
+    new = []
+    for x in arg1:
+        if x < 0:
+            new.append(x)
+    for y in arg2:
+        if y < 0:
+            new.append(y)
+    return new
+
+
+def pos(arg1, arg2):
+    new = []
+    for x in arg1:
+        if x > 0:
+            new.append(x)
+    for y in arg2:
+        if y > 0:
+            new.append(y)
+    return new
+
+
+l1 = []
+l2 = []
+import random
+
+for e in range(10):
+    l1.append(random.randint(-10, 10))
+    l2.append(random.randint(-10, 10))
+# print(l1, l2)
+# print(negative(l1, l2))
+# print(pos(l1, l2))
+"""
+Letter frequency.
+"""
+
+string = "Hello everybody"
+dict1 = {}
+for e in string:
+    if e not in dict1:
+        dict1[e] = 0
+# print(dict1)
+
+dict2 = {}
+
+
+def letterFrequency(arg):
+    for e in arg:
+        if e not in dict2:
+            dict2[e] = 1
+        else:
+            dict2[e] += 1
+    return dict2
+
+
+# print(letterFrequency(string))
+
+'''
+Implement the Python function <code>findthekey(dictionary, value)
+</code> that returns the key (if any) 
+corresponding to the value given as an argument.
+'''
+
+
+def find(dic, val):
+    for e in dic:
+        if dic[e] == val:
+            return e
+    return False
+
+
+d = {'a': 3, 'b': 4, 'c': 12}
+# print(find(d, 21))
+'''
+Implement the Python function
+<code>insert(dictionary, key, value)</code> that inserts the pair key, 
+value after checking the non existence of the key in the dictionary and returns <code>True</code>. 
+The function prints a message and returns <code>False</code> if the key is found in the dictionary.
+ Hint: use the operator <code>in</code>.
+'''
+
+
+def insert(dic, key, val):
+    for e in dic:
+        if key not in dic:
+            dic[key] = val
+            return True
+    print(key, "already in the", dic)
+    return False
+
+
+gradeCounts = {"A": 8, "D": 3, "B": 15, "F": 2, "C": 6}
+# print(insert(gradeCounts, "G", 3))
+"""
+Given the dictionary <code>dict2</code> compute the sum of all values.
+"""
+
+
+def sumval(dic):
+    sum = 0
+    for e in dic:
+        # print(e) #Elements in dictionary(key and value)
+        # print(dic[e]) #Value
+        sum += dic[e]
+    return sum
+
+
+grade_Counts = {"A": 8, "D": 3, "B": 15, "F": 2, "C": 6}
+# print(sumval(grade_Counts))
+"""
+Implement the Python function
+<code>countstringlen(*args)</code> 
+that returns a list containing the length of the strings that are fed as arguments of the function.
+"""
+
+
+def counterstringlen(*args):
+    new = []
+    for e in args:
+        new.append(len(e))
+    return new
+
+
+# print(counterstringlen("Alik","Wow","lobok"))
+
+# 1 ### Implement the Python function <code>replace(stringx)</code> that returns the argument string with all vowels replaced by an underscore.
+# For example, <code>replace('hello')</code> will return 'h_ll_'.
+def replace(arg):
+    v = "aeoiuyo"
+    new = ""
+    for e in arg:
+        if e in v:
+            return arg.replace(e, "_")
+    return arg
+
+
+# print(replace("hello"))
+def replace2(arg):
+    v = "aeoiuy"
+    for e in range(len(arg)):
+        if arg[e] in v:
+            arg = arg[:e] + "_" + arg[e + 1:]
+    return arg
+
+
+# print(replace2('Hello'))
+
+# 2 ### Implement the Python function <code>vowelposition(stringx)</code> that returns a list containing the position of the vowels of the given string.
+# For example: <code>vowelposition('hello')</code> will return <code>[1, 4]</code>.
+def vowelposition(stringx):
+    v = "aeoiuy"
+    new = []
+    for e in range(len(stringx)):
+        if stringx[e] in v:
+            new.append(e)
+    return new
+
+
+# print(vowelposition("hello"))
+
+# 3 ### Implement the Python function <code>myrange(listx)</code> that returns the range
+# (namely, the difference between the largest and the smallest) of the elements of the argument list.
+# Test the function using a list filled with dstinct random integer numbers.
+import random
+
+mainlist = []
+for e in range(10):
+    if e not in mainlist:
+        mainlist.append(random.randint(1, 20))
+
+
+# print(mainlist)
+def myrange(arg):
+    min = arg[0]
+    max = arg[0]
+    ans = 0
+    for e in arg:
+        if e > max:
+            max = e
+        elif e < min:
+            min = e
+    ans = max - min
+    print(max, min)
+    return ans
+
+
+# print(myrange(mainlist))
+
+# 4 ### Implement the Python function <code>average(listx)</code> that returns the average value of the elements of the argument list.
+# Test the function using a list filled with dstinct random integer numbers.
+import random
+
+mylist2 = []
+for e in range(5):
+    mylist2.append(random.randint(1, 20))
+
+
+# print(mylist2)
+def average(arg):
+    new = 0
+    for e in arg:
+        new += e
+    return new / len(arg)
+
+
+# print(average(mylist2))
+
+# 5 ### Implement the Python function <code>altsum(listx)</code> that returns the alternating sum of all elements in the argument list.
+# For example, given the list <code>listx = [1,4,9,10,5]</code> it computes <code>1-4+9-10+5</code> and returns the results.
+
+def altsum(arg):
+    ans = 0
+    for e in arg:
+        if e % 2 != 0:
+            ans += +e
+        else:
+            ans += -e
+    return ans
+
+
+listx = [1, 4, 9, 10, 5]
+# print(altsum(listx))
+
+
+"""
